@@ -20,7 +20,7 @@ void removeListeners(cocos2d::Ref *target);
 static const std::string SERVER_VERSION_FILE                    = "http://superbomb.co/3eries/rsp/version.json";
 static const std::string SERVER_GAME_CONFIG_FILE                = "http://superbomb.co/3eries/rsp/game_config.json";
 
-#define                  AES256_KEY                               "A1din7aah98dh9wef974fnsudh54ugJs"
+#define                  AES256_KEY                               "A1dsm7oih98dh9wef974fnsudh54ugJs"
 
 static const std::string GAME_CONFIG_FILE                       = "game_config.json";
 
@@ -29,8 +29,8 @@ static const std::string INTERNAL_GAME_CONFIG_FILE              = "config/" + GA
 
 static const std::string INTERNAL_GAME_CONFIG_FILE_VERSION      = "1.0.0";
 
-#define                  ENCRYPT_GAME_CONFIG_FILE                 1
-#define                  ENCRYPT_PLUGIN_CONFIG_FILE               1
+#define                  ENCRYPT_GAME_CONFIG_FILE                 0
+#define                  ENCRYPT_PLUGIN_CONFIG_FILE               0
 
 // Plugin
 static const std::string PLUGIN_CONFIG_FILE                     = "config/plugin_config.json";
@@ -83,9 +83,20 @@ static const std::string DIR_CONTENT_DATA           = DIR_ADD(DIR_CONTENT, "data
 static const std::string DIR_CONTENT_WORLD_MAP      = DIR_ADD(DIR_CONTENT, "world_map");
 static const std::string DIR_CONTENT_PUZZLE         = DIR_ADD(DIR_CONTENT, "puzzle");
 
+static const StringList  BUG_DIE_EFFECT_ANIMS({
+    DIR_IMG_GAME + "effect_burst01.png",
+    DIR_IMG_GAME + "effect_burst02.png",
+    DIR_IMG_GAME + "effect_burst03.png",
+    DIR_IMG_GAME + "effect_burst04.png",
+    DIR_IMG_GAME + "effect_burst05.png",
+    DIR_IMG_GAME + "effect_burst06.png",
+    DIR_IMG_GAME + "effect_burst07.png",
+    DIR_IMG_GAME + "effect_burst08.png",
+});
+
 // 스파인 애니메이션
 static const std::string ANIM_EXT                   = ".json";
-static const std::string ANIM_LOGO                  = DIR_IMG_SPLASH + "3eries_logo.json";
+static const std::string ANIM_LOGO                  = DIR_IMG_SPLASH + "Beries_logo.json";
 static const std::string ANIM_CLOUD                 = DIR_IMG_GAME + "RSP_cloud.json";
 static const std::string ANIM_CONTINUE              = DIR_IMG_GAME + "continue.json";
 
@@ -124,6 +135,7 @@ static const std::string SOUND_LEVEL_CLEAR          = DIR_SOUND + "effect_05.mp3
 // Color
 namespace Color {
     static const cocos2d::Color4B POPUP_BG          = cocos2d::Color4B(0,0,0,255*0.5f);
+    static const cocos2d::Color4B GAME_BG           = cocos2d::Color4B(16,16,16,255);
 }
 
 // ZOrder

@@ -21,10 +21,11 @@
 #include "SettingPopup.hpp"
 #include "BannerView.hpp"
 
+#include "../game/object/Bug.hpp"
+
 USING_NS_CC;
 USING_NS_SB;
 using namespace cocos2d::ui;
-using namespace spine;
 using namespace std;
 
 MainScene::MainScene() {
@@ -44,7 +45,6 @@ bool MainScene::init() {
     SBAnalytics::setCurrentScreen(ANALYTICS_SCREEN_MAIN);
     
     initBg();
-    initTitle();
     initMenu();
     
     // 개발 버전 표기
@@ -201,7 +201,25 @@ void MainScene::showSettingPopup() {
 
 void MainScene::initBg() {
     
-    addChild(LayerColor::create(Color4B(GAME_BG_COLOR)));
+    addChild(LayerColor::create(Color::GAME_BG));
+    
+    auto title = Sprite::create(DIR_IMG_MAIN + "title.png");
+    title->setAnchorPoint(ANCHOR_M);
+    title->setPosition(Vec2TC(0, -369));
+    addChild(title);
+    
+    // Bug
+    auto bug = Bug::create();
+    bug->setAnchorPoint(ANCHOR_M);
+    bug->setPosition(Vec2BC(0, 226));
+    bug->setScale(0.25f);
+    addChild(bug);
+    
+    // Balloon
+    auto balloon = Sprite::create(DIR_IMG_MAIN + "balloon.png");
+    balloon->setAnchorPoint(ANCHOR_M);
+    balloon->setPosition(Vec2BC(0, 365));
+    addChild(balloon);
     
     // 배너
     if( !User::isRemovedAds() ) {
@@ -213,89 +231,13 @@ void MainScene::initBg() {
     auto creditBtn = SBNodeUtils::createTouchNode();
     creditBtn->setTag(Tag::BTN_CREDIT);
     creditBtn->setAnchorPoint(ANCHOR_M);
-    creditBtn->setPosition(Vec2MC(0, 200));
-    creditBtn->setContentSize(Size(SB_WIN_SIZE.width*0.6f, 200));
-    addChild(creditBtn, SBZOrder::MIDDLE);
+    creditBtn->setPosition(Vec2TC(0, -369 + 40));
+    creditBtn->setContentSize(Size(title->getContentSize().width, 200));
+    addChild(creditBtn, SBZOrder::BOTTOM);
     
     creditBtn->addClickEventListener([=](Ref*) {
         this->onClick(creditBtn);
     });
-}
-
-void MainScene::initTitle() {
- 
-    titleColors = TILE_COLORS;
-    titleColorIndex = 0;
-    
-    // random_shuffle(titleColors.begin(), titleColors.end());
-
-//    auto stencil = Sprite::create(DIR_IMG_MAIN + "main_title_mask.png");
-//    stencil->setAnchorPoint(Vec2::ZERO);
-//    stencil->setPosition(Vec2::ZERO);
-//
-//    auto clippingNode = ClippingNode::create(stencil);
-//    clippingNode->setAlphaThreshold(0);
-////    clippingNode->setInverted(true);
-//    clippingNode->setAnchorPoint(ANCHOR_M);
-//    clippingNode->setPosition(Vec2MC(0, 250));
-//    clippingNode->setContentSize(stencil->getContentSize());
-//    addChild(clippingNode);
-//
-//    /*
-//    auto title = Sprite::create(DIR_IMG_MAIN + "main_title.png");
-//    title->setAnchorPoint(Vec2::ZERO);
-//    title->setPosition(Vec2::ZERO);
-//    title->setColor(titleColors[titleColors.size()-1]);
-//    clippingNode->addChild(title);
-//    */
-//
-//    auto cover = Sprite::create(DIR_IMG_MAIN + "main_title_cover.png");
-//    cover->setAnchorPoint(ANCHOR_MB);
-//    cover->setPosition(Vec2BC(clippingNode->getContentSize(), 0, -cover->getContentSize().height));
-//    cover->setColor(titleColors[0]);
-//    clippingNode->addChild(cover);
-
-    int firstColorIdx = arc4random() % (titleColors.size()-1);
-    firstColorIdx += 1;
-    
-    auto title = Sprite::create(DIR_IMG_MAIN + "main_title.png");
-    title->setAnchorPoint(ANCHOR_M);
-    title->setPosition(Vec2MC(-2, 101));
-    title->setColor(titleColors[firstColorIdx]);
-    addChild(title);
-    
-    Vec2 COVER_POSITION = Vec2MC(0, -80);
-    
-    auto cover = Sprite::create(DIR_IMG_MAIN + "main_title_cover.png");
-    cover->setAnchorPoint(ANCHOR_MT);
-    cover->setPosition(COVER_POSITION);
-    cover->setColor(titleColors[titleColorIndex++]);
-    addChild(cover);
-    
-    auto mask = Sprite::create(DIR_IMG_MAIN + "main_title_mask.png");
-    mask->setAnchorPoint(ANCHOR_M);
-    mask->setPosition(Vec2MC(0,0));
-    mask->setColor(GAME_BG_COLOR);
-    addChild(mask);
-    
-    // 연출
-    auto move = MoveBy::create(3.0f, Vec2(0, cover->getContentSize().height));
-    auto callFunc = CallFunc::create([=]() {
-       
-        title->setColor(cover->getColor());
-        
-        cover->setPositionY(COVER_POSITION.y);
-        cover->setColor(titleColors[titleColorIndex]);
-        
-        titleColorIndex++;
-        
-        if( titleColorIndex == titleColors.size() ) {
-            titleColorIndex = 0;
-        }
-    });
-    auto delay = DelayTime::create(0.0f);
-    auto seq = Sequence::create(move, callFunc, delay, nullptr);
-    cover->runAction(RepeatForever::create(seq));
 }
 
 /**
@@ -303,60 +245,14 @@ void MainScene::initTitle() {
  */
 void MainScene::initMenu() {
     
-    // 탭하여 시작
-    auto tapToStart = Label::createWithTTF("TAP TO START", FONT_ROBOTO_BLACK, 40, Size::ZERO,
-                                           TextHAlignment::CENTER, TextVAlignment::CENTER);
-    tapToStart->setTextColor(Color4B(239, 255, 233, 255));
-    tapToStart->setAnchorPoint(ANCHOR_M);
-    tapToStart->setPosition(Vec2BC(0, 250));
-    addChild(tapToStart);
-    
     auto btn = SBNodeUtils::createTouchNode();
     btn->setTag(Tag::BTN_START);
-    btn->setAnchorPoint(ANCHOR_MB);
-    btn->setPosition(Vec2BC(0, 80));
-    btn->setContentSize(Size(SB_WIN_SIZE.width*0.85f, SB_WIN_SIZE.height*0.40f));
+    btn->setAnchorPoint(ANCHOR_M);
+    btn->setPosition(Vec2MC(0,0));
+    btn->setContentSize(Size(SB_WIN_SIZE.width*0.8f, SB_WIN_SIZE.height*0.8f));
     addChild(btn);
     
     btn->addClickEventListener([=](Ref*) {
         this->onClick(btn);
     });
-    
-    // blink
-    {
-        auto delay = DelayTime::create(0.5f);
-        auto callFunc = CallFunc::create([=]() {
-            auto blink = RepeatForever::create(Blink::create(1.0f, 1));
-            tapToStart->runAction(blink);
-        });
-        tapToStart->runAction(Sequence::create(delay, callFunc, nullptr));
-    }
-    
-    // 메인 화면 전용 메뉴
-//    auto settingBtn = Button::create(DIR_IMG_COMMON + "common_btn_more.png");
-//    settingBtn->setTag(Tag::BTN_SETTING);
-//    settingBtn->setZoomScale(ButtonZoomScale::NORMAL);
-//    settingBtn->setAnchorPoint(ANCHOR_M);
-//    settingBtn->setPosition(Vec2TR(-56, -54));
-//    addChild(settingBtn);
-//
-//    settingBtn->setOnClickListener(CC_CALLBACK_1(GameScene::onClick, this));
-    
-    SBUIInfo infos[] = {
-        SBUIInfo(Tag::BTN_LEADER_BOARD, ANCHOR_M, Vec2TL(56, -54),
-                 DIR_IMG_MAIN + "main_btn_leaderboard.png"),
-        SBUIInfo(Tag::BTN_SETTING, ANCHOR_M, Vec2TR(-56, -54),
-                 DIR_IMG_COMMON + "common_btn_more.png"),
-    };
-    
-    for( int i = 0; i < sizeof(infos)/sizeof(SBUIInfo); ++i ) {
-        auto info = infos[i];
-        
-        auto btn = SBButton::create(info.file);
-        btn->setZoomScale(ButtonZoomScale::NORMAL);
-        info.apply(btn);
-        addChild(btn);
-        
-        btn->setOnClickListener(CC_CALLBACK_1(MainScene::onClick, this));
-    }
 }

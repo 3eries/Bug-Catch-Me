@@ -1,0 +1,41 @@
+
+Beries_logo.png
+size: 2048,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+3
+  rotate: false
+  xy: 520, 2
+  size: 104, 124
+  orig: 104, 124
+  offset: 0, 0
+  index: -1
+bg
+  rotate: true
+  xy: 1038, 12
+  size: 240, 320
+  orig: 240, 320
+  offset: 0, 0
+  index: -1
+logo
+  rotate: false
+  xy: 2, 128
+  size: 516, 124
+  orig: 516, 124
+  offset: 0, 0
+  index: -1
+logo2
+  rotate: false
+  xy: 2, 2
+  size: 516, 124
+  orig: 516, 124
+  offset: 0, 0
+  index: -1
+logo_empty_black
+  rotate: false
+  xy: 520, 128
+  size: 516, 124
+  orig: 516, 124
+  offset: 0, 0
+  index: -1

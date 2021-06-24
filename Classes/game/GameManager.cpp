@@ -372,6 +372,14 @@ void GameManager::onStageClear(bool isSkipped) {
 }
 
 /**
+ * 타이머 시작
+ */
+void GameManager::onStartTimer() {
+    
+    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_START_TIMER);
+}
+
+/**
  * 다음 스테이지로 이동
  */
 void GameManager::onMoveNextStage() {

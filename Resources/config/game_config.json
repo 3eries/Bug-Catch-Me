@@ -1,1 +1,288 @@
-FKKKCbOiZH3RcG9EtIvZBqDYHTh5TY8YbPozBWltTQ4Gkq7xDo/KhHOmI+p0XTLtd4Re4EfPeIEJ178xb5/O+2o84Sg4wQ0lcZTb2dTsNIeU2b0z8r6Ccyk27N3QWn+/mDR9KzLeOpY0Zjea6t5xGf2jxH/beCZ5e+PqCspdSRaC3q5RoCiCpZuUCMuSAFiPhakzVbddmhujHIOpx5fHTyMfAVq1bh8Gez0gLxh0enHhqlkyZIxssZBWg7oR3PMdEgEqtwMufPThTIcd9s0kWxRFGdF7PGqGHCbjVQxoeCfTemnewFbjx+jyQgL1lWIAIEzaTLdEw/l2XX6ewobz0RJIxM5Gw16fN4c4Izhqp3tYVaPC5Bl979ZYG69pUx/8Q5L1RdxAv+jqiBmjaOyGtjt4IuKSj7ocMimBLorAEGwWph7DyCNWtRTajslmtOe+8EtUoz3Vzgvg/ZpktOsELPU9PFD9LLfhcn/CGmQIc7DLZuMwgd8VO8FD4huAIYkugqiZPbTdgMgxS1My+RGNAOwEptMcpg/rkUHcbaiczdnDAH3jiXgJRgTiYZIYo78hAeVe7F1S2X9Ev2ZLmxglUU+OOA8Dw7vXcf9HbV8h8Ower+7tJGaUy4kZD9I3Mw+y
+{
+    "android": {
+        "store": "https://play.google.com/store/apps/details?id=com.superbomb.series.rps",
+        "more_games": "https://play.google.com/store/apps/dev?id=5304294506734337771"
+    },
+    "ios": {
+        "store": "https://itunes.apple.com/app/id1410764042",
+        "more_games": "https://itunes.apple.com/developer/seong-min-hwang/id1392753835"
+    },
+    "max_score": 9999,
+    "max_bug": 5,
+    "max_life": 7,
+    "levels": [{
+            "level": 1,
+            "bugs": [{
+                "teleport_interval": 0.8
+            }],
+            "life": 3,
+            "time": 15
+        },
+        {
+            "level": 2
+        },
+        {
+            "level": 3
+
+        },
+        {
+            "level": 4
+        },
+        {
+            "level": 5
+        },
+        {
+            "level": 6,
+            "bugs": [{
+                "teleport_interval": 0.7
+            }],
+            "life": 3,
+            "time": 15
+        },
+        {
+            "level": 7
+        },
+        {
+            "level": 8
+        },
+        {
+            "level": 9
+        },
+        {
+            "level": 10
+        },
+        {
+            "level": 11,
+            "bugs": [{
+                    "teleport_interval": 0.7
+                },
+                {
+                    "teleport_interval": 0.8
+                }
+            ],
+            "life": 6,
+            "time": 15
+        },
+        {
+            "level": 12
+        },
+        {
+            "level": 13
+        },
+        {
+            "level": 14
+        },
+        {
+            "level": 15
+        },
+        {
+            "level": 16,
+            "bugs": [{
+                    "teleport_interval": 0.65
+                },
+                {
+                    "teleport_interval": 0.75
+                }
+            ],
+            "life": 6,
+            "time": 15
+        },
+        {
+            "level": 17
+        },
+        {
+            "level": 18
+        },
+        {
+            "level": 19
+        },
+        {
+            "level": 20
+        },
+        {
+            "level": 21,
+            "bugs": [{
+                "teleport_interval": 0.6
+            }],
+            "life": 3,
+            "time": 13
+        },
+        {
+            "level": 22
+        },
+        {
+            "level": 23
+        },
+        {
+            "level": 24
+        },
+        {
+            "level": 25
+        },
+        {
+            "level": 26,
+            "bugs": [{
+                "teleport_interval": 0.55
+            }],
+            "life": 3,
+            "time": 13
+        },
+        {
+            "level": 27
+        },
+        {
+            "level": 28
+        },
+        {
+            "level": 29
+        },
+        {
+            "level": 30
+        },
+        {
+            "level": 31,
+            "bugs": [{
+                    "teleport_interval": 0.55
+                },
+                {
+                    "teleport_interval": 0.6
+                },
+                {
+                    "teleport_interval": 0.65
+                }
+            ],
+            "life": 7,
+            "time": 13
+        },
+        {
+            "level": 32
+        },
+        {
+            "level": 33
+        },
+        {
+            "level": 34
+        },
+        {
+            "level": 35
+        },
+        {
+            "level": 36,
+            "bugs": [{
+                    "teleport_interval": 0.5
+                },
+                {
+                    "teleport_interval": 0.55
+                },
+                {
+                    "teleport_interval": 0.6
+                }
+            ],
+            "life": 7,
+            "time": 13
+        },
+        {
+            "level": 37
+        },
+        {
+            "level": 38
+        },
+        {
+            "level": 39
+        },
+        {
+            "level": 40
+        },
+        {
+            "level": 41,
+            "bugs": [{
+                    "teleport_interval": 0.45
+                },
+                {
+                    "teleport_interval": 0.5
+                }
+            ],
+            "life": 6,
+            "time": 12
+        },
+        {
+            "level": 42
+        },
+        {
+            "level": 43
+        },
+        {
+            "level": 44
+        },
+        {
+            "level": 45
+        },
+        {
+            "level": 46,
+            "bugs": [{
+                "teleport_interval": 0.4
+            }],
+            "life": 3,
+            "time": 12
+        },
+        {
+            "level": 47
+        },
+        {
+            "level": 48
+        },
+        {
+            "level": 49
+        },
+        {
+            "level": 50
+        },
+        {
+            "level": 51,
+            "bugs": [{
+                "teleport_interval": 0.35
+            }],
+            "life": 3,
+            "time": 12
+        },
+        {
+            "level": 52
+        },
+        {
+            "level": 53
+        },
+        {
+            "level": 54
+        },
+        {
+            "level": 55
+        },
+        {
+            "level": 56,
+            "bugs": [{
+                    "teleport_interval": 0.35
+                },
+                {
+                    "teleport_interval": 0.4
+                },
+                {
+                    "teleport_interval": 0.45
+                }
+            ],
+            "life": 7,
+            "time": 12
+        },
+        {
+            "level": 57
+        },
+        {
+            "level": 58
+        },
+        {
+            "level": 59
+        },
+        {
+            "level": 60
+        }
+    ]
+}

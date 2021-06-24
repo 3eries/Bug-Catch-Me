@@ -90,6 +90,7 @@ public:
     static void onStageRestart();
     static void onStageClear(bool isSkipped = false);
     
+    static void onStartTimer();
     static void onMoveNextStage();
     static void onMoveNextStageFinished();
     

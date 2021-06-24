@@ -24,6 +24,7 @@ static const std::string GAME_EVENT_RESULT                        = "GAME_EVENT_
 static const std::string GAME_EVENT_STAGE_CHANGED                 = "GAME_EVENT_STAGE_CHANGED";
 static const std::string GAME_EVENT_STAGE_RESTART                 = "GAME_EVENT_STAGE_RESTART";
 static const std::string GAME_EVENT_STAGE_CLEAR                   = "GAME_EVENT_STAGE_CLEAR";
+static const std::string GAME_EVENT_START_TIMER                   = "GAME_EVENT_START_TIMER";
 static const std::string GAME_EVENT_MOVE_NEXT_STAGE               = "GAME_EVENT_MOVE_NEXT_STAGE";
 static const std::string GAME_EVENT_MOVE_NEXT_STAGE_FINISHED      = "GAME_EVENT_MOVE_NEXT_STAGE_FINISHED";
 
@@ -42,6 +43,7 @@ enum class GameEvent {
     STAGE_CHANGED,
     STAGE_RESTART,
     STAGE_CLEAR,
+    START_TIMER,
     MOVE_NEXT_STAGE,
     MOVE_NEXT_STAGE_FINISHED,
 };
@@ -60,6 +62,7 @@ static std::map<std::string, GameEvent> GAME_EVENT_ENUMS = {
     { GAME_EVENT_STAGE_CHANGED, GameEvent::STAGE_CHANGED },
     { GAME_EVENT_STAGE_RESTART, GameEvent::STAGE_RESTART },
     { GAME_EVENT_STAGE_CLEAR, GameEvent::STAGE_CLEAR },
+    { GAME_EVENT_START_TIMER, GameEvent::START_TIMER },
     { GAME_EVENT_MOVE_NEXT_STAGE, GameEvent::MOVE_NEXT_STAGE },
     { GAME_EVENT_MOVE_NEXT_STAGE_FINISHED, GameEvent::MOVE_NEXT_STAGE_FINISHED },
 };

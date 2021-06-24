@@ -39,7 +39,6 @@ private:
     bool onBackKeyReleased() override;
     
     void initBg();
-    void initTitle();
     void initMenu();
     
 private:
@@ -47,10 +46,6 @@ private:
     
     void replaceGameScene();
     void showSettingPopup();
-    
-private:
-    std::vector<cocos2d::Color3B> titleColors;
-    int titleColorIndex;
 };
 
 #endif /* MainScene_hpp */
