@@ -32,13 +32,10 @@
         "ads": {
             "test": 0,
             "auto_load_interval": 3,
-            "app_id": "",
-            "banner_unit_id": "",
-            "interstitial_unit_id": "",
-            "rewarded_video_unit_id": "",
-            "placements": {
-                "vungle": []
-            }
+            "app_id": "ca-app-pub-9699962520672188~4139135267",
+            "banner_unit_id": "ca-app-pub-9699962520672188/4115972589",
+            "interstitial_unit_id": "ca-app-pub-9699962520672188/9176727570",
+            "rewarded_video_unit_id": ""
         },
         "iap": {
             "items": {
