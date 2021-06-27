@@ -58,44 +58,46 @@ bool Bug::init() {
     image->setPosition(Vec2MC(size, 0, 0));
     
     // 리스너 초기화
-    StringList events({
-        GAME_EVENT_ENTER,
-        GAME_EVENT_EXIT,
-        GAME_EVENT_RESET,
-        GAME_EVENT_START,
-        GAME_EVENT_RESTART,
-        GAME_EVENT_PAUSE,
-        GAME_EVENT_RESUME,
-        GAME_EVENT_OVER,
-        GAME_EVENT_CONTINUE,
-        GAME_EVENT_RESULT,
-        GAME_EVENT_START_TIMER,
-        GAME_EVENT_STAGE_CHANGED,
-    });
-    
-    GameManager::addEventListener(events, [=](GameEvent event, void *userData) {
+    if( SceneManager::isGameScene() ) {
+        StringList events({
+            GAME_EVENT_ENTER,
+            GAME_EVENT_EXIT,
+            GAME_EVENT_RESET,
+            GAME_EVENT_START,
+            GAME_EVENT_RESTART,
+            GAME_EVENT_PAUSE,
+            GAME_EVENT_RESUME,
+            GAME_EVENT_OVER,
+            GAME_EVENT_CONTINUE,
+            GAME_EVENT_RESULT,
+            GAME_EVENT_START_TIMER,
+            GAME_EVENT_STAGE_CHANGED,
+        });
         
-        switch( event ) {
-            case GameEvent::ENTER:          this->onGameEnter();         break;
-            case GameEvent::EXIT:           this->onGameExit();          break;
-            case GameEvent::RESET:          this->onGameReset();         break;
-            case GameEvent::START:          this->onGameStart();         break;
-            case GameEvent::RESTART:        this->onGameRestart();       break;
-            case GameEvent::PAUSE:          this->onGamePause();         break;
-            case GameEvent::RESUME:         this->onGameResume();        break;
-            case GameEvent::OVER:           this->onGameOver();          break;
-            case GameEvent::CONTINUE:       this->onGameContinue();      break;
-            case GameEvent::RESULT:         this->onGameResult();        break;
-            case GameEvent::START_TIMER:    this->onStartTimer();        break;
-                
-            case GameEvent::STAGE_CHANGED: {
-                auto level = (LevelData*)userData;
-                this->onLevelChanged(*level);
-            } break;
-                
-            default: break;
-        }
-    }, this);
+        GameManager::addEventListener(events, [=](GameEvent event, void *userData) {
+            
+            switch( event ) {
+                case GameEvent::ENTER:          this->onGameEnter();         break;
+                case GameEvent::EXIT:           this->onGameExit();          break;
+                case GameEvent::RESET:          this->onGameReset();         break;
+                case GameEvent::START:          this->onGameStart();         break;
+                case GameEvent::RESTART:        this->onGameRestart();       break;
+                case GameEvent::PAUSE:          this->onGamePause();         break;
+                case GameEvent::RESUME:         this->onGameResume();        break;
+                case GameEvent::OVER:           this->onGameOver();          break;
+                case GameEvent::CONTINUE:       this->onGameContinue();      break;
+                case GameEvent::RESULT:         this->onGameResult();        break;
+                case GameEvent::START_TIMER:    this->onStartTimer();        break;
+                    
+                case GameEvent::STAGE_CHANGED: {
+                    auto level = (LevelData*)userData;
+                    this->onLevelChanged(*level);
+                } break;
+                    
+                default: break;
+            }
+        }, this);
+    }
     
     return true;
 }

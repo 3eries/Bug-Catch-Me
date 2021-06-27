@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>22857055315-19ddqnhav3ec8j8ck69rasiupvmnl7cu.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.22857055315-19ddqnhav3ec8j8ck69rasiupvmnl7cu</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>22857055315-08394e2dnb72lqrn0nungf9so052vjgj.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCqvE7aBWJ0Un4WAVNCIB3IiUfRVjoorQE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>22857055315</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.superbomb.beries.BCatchMe</string>
+	<key>PROJECT_ID</key>
+	<string>beries-bug-catchme</string>
+	<key>STORAGE_BUCKET</key>
+	<string>beries-bug-catchme.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:22857055315:ios:6f6e96954366e917821aa6</string>
+	<key>DATABASE_URL</key>
+	<string>https://beries-bug-catchme.firebaseio.com</string>
+</dict>
+</plist>

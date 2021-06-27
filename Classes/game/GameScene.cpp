@@ -18,6 +18,8 @@
 #include "CommonLoadingBar.hpp"
 #include "SettingPopup.hpp"
 
+#include "ui/ResultPopup.hpp"
+
 USING_NS_CC;
 USING_NS_SB;
 using namespace cocos2d::ui;
@@ -74,19 +76,17 @@ bool GameScene::init() {
 
 void GameScene::onEnter() {
     
-    GAME_MANAGER->setStage(User::getClearStage()+1);
-    
     BaseScene::onEnter();
-    
-    GameManager::onGameEnter();
-    GameManager::onGameStart();
 }
 
 void GameScene::onEnterTransitionDidFinish() {
     
     BaseScene::onEnterTransitionDidFinish();
     
-    SBAudioEngine::playBGM(SOUND_BGM_GAME);
+    // SBAudioEngine::playBGM(SOUND_BGM_GAME);
+    
+    GameManager::onGameEnter();
+    GameManager::onGameStart();
 }
 
 void GameScene::onExit() {
@@ -128,26 +128,77 @@ bool GameScene::onBackKeyReleased() {
     }
     
     // 설정 팝업 생성
+    /*
     if( PopupManager::getInstance()->getPopupCount() == 0 ) {
         onClick(getChildByTag(Tag::BTN_SETTING));
         return true;
     }
+    */
     
     return false;
 }
 
 /**
- * 스테이지 변경
+ * 게임 리셋
  */
-void GameScene::onStageChanged(const StageData &stage) {
+void GameScene::onGameReset() {
+ 
+    setSceneTouchLocked(false);
 }
 
 /**
- * 스테이지 클리어
+ * 게임 일시정지
  */
-void GameScene::onStageClear(const StageData &stage) {
+void GameScene::onGamePause() {
+    
+    setSceneTouchLocked(true);
+    
+    /*
+    if( !GameManager::getInstance()->hasState(GameState::GAME_OVER) &&
+        !GameManager::getInstance()->hasState(GameState::RESULT) ) {
+        showPausePopup();
+    }
+    */
+}
 
-    // 클리어 팝업
+/**
+ * 게임 재게
+ */
+void GameScene::onGameResume() {
+    
+    setSceneTouchLocked(false);
+}
+
+/**
+ * 게임 오버
+ */
+void GameScene::onGameOver() {
+    
+    setSceneTouchLocked(true);
+    
+    SBDirector::postDelayed(this, [=]() {
+        
+        GameManager::onGameResult();
+        
+    }, GAME_RESULT_DELAY, true);
+}
+
+/**
+ * 게임 결과
+ */
+void GameScene::onGameResult() {
+    
+    showResultPopup();
+}
+
+/**
+ * 레벨 클리어
+ */
+void GameScene::onLevelClear(const LevelData &level) {
+    
+    if( GAME_MANAGER->getLevel() % 10 == 0 && AdsHelper::getInstance()->isInterstitialLoaded() ) {
+        AdsHelper::getInstance()->showInterstitial();
+    }
 }
 
 /**
@@ -160,6 +211,25 @@ void GameScene::replaceScene(SceneType type) {
     removeListeners(this);
     
     BaseScene::replaceScene(type);
+}
+
+/**
+ * 게임 결과 팝업 노출
+ */
+void GameScene::showResultPopup() {
+ 
+    // 배너 숨김
+    removeChildByTag(Tag::BANNER);
+    AdsHelper::getInstance()->hideBanner();
+    
+    // 팝업
+    auto popup = ResultPopup::create(GAME_MANAGER->getLevel());
+    popup->setOnPopupEventListener([=](Node *sender, PopupEventType eventType) {
+    });
+    popup->setOnClickListener([=]() {
+        this->replaceScene(SceneType::MAIN);
+    });
+    SceneManager::getScene()->addChild(popup, ZOrder::POPUP_BOTTOM);
 }
 
 /**
@@ -223,7 +293,7 @@ void GameScene::initGameView() {
 void GameScene::initMenu() {
     
     // 설정 버튼
-    // common_btn_more.png Vec2TR(-56, -54) , Size(74, 74)
+    /*
     auto settingBtn = SBButton::create(DIR_IMG_COMMON + "common_btn_more.png");
     settingBtn->setTag(Tag::BTN_SETTING);
     settingBtn->setZoomScale(ButtonZoomScale::NORMAL);
@@ -232,6 +302,7 @@ void GameScene::initMenu() {
     addChild(settingBtn);
     
     settingBtn->setOnClickListener(CC_CALLBACK_1(GameScene::onClick, this));
+     */
 }
 
 /**
@@ -240,21 +311,26 @@ void GameScene::initMenu() {
 void GameScene::initGameListener() {
 
     StringList events({
-        GAME_EVENT_STAGE_CHANGED,
+        GAME_EVENT_RESET,
+        GAME_EVENT_PAUSE,
+        GAME_EVENT_RESUME,
+        GAME_EVENT_OVER,
+        GAME_EVENT_RESULT,
         GAME_EVENT_STAGE_CLEAR,
     });
     
     GameManager::addEventListener(events, [=](GameEvent event, void *userData) {
         
         switch( event ) {
-            case GameEvent::STAGE_CHANGED: {
-                auto stage = (StageData*)userData;
-                this->onStageChanged(*stage);
-            } break;
-                
+            case GameEvent::RESET:          this->onGameReset();         break;
+            case GameEvent::PAUSE:          this->onGamePause();         break;
+            case GameEvent::RESUME:         this->onGameResume();        break;
+            case GameEvent::OVER:           this->onGameOver();          break;
+            case GameEvent::RESULT:         this->onGameResult();        break;
+
             case GameEvent::STAGE_CLEAR: {
-                auto stage = (StageData*)userData;
-                this->onStageClear(*stage);
+                auto level = (LevelData*)userData;
+                this->onLevelClear(*level);
             } break;
                 
             default: break;

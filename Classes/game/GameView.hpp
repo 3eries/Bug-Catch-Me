@@ -13,14 +13,26 @@
 #include "cocos2d.h"
 #include "superbomb.h"
 
-#include "../content/data/model/StageData.h"
+#include "Define.h"
+#include "GameManager.hpp"
 
-class StageProgressBar;
+class Bug;
+class GameTimer;
+class BgBinary;
 
 class GameView : public cocos2d::Node {
 public:
     CREATE_FUNC(GameView);
     ~GameView();
+    
+private:
+    enum Tag {
+        BG_BINARY = 10,
+        KILLS = 100,
+    };
+    
+    enum class ZOrder {
+    };
     
 private:
     GameView();
@@ -30,26 +42,56 @@ private:
     void onEnterTransitionDidFinish() override;
     void cleanup() override;
     
+    void initTouch();
     void initBg();
+    void initObjects();
     void initGameListener();
-    
-private:
-    StageProgressBar *stageProgressBar;
-    
-    int clearCount; // 클리어 횟수
     
 #pragma mark- Game Event
 public:
     void onGameReset();
+    void onGameStart();
     void onGamePause();
     void onGameResume();
+    void onGameOver();
+    void onGameResult();
     
-    void onStageChanged(const StageData &stage);
-    void onStageRestart(const StageData &stage);
-    void onStageClear(const StageData &stage);
+    void onLevelChanged(const LevelData &stage);
+    void onLevelClear(const LevelData &stage);
     
-    void onMoveNextStage();
-    void onMoveNextStageFinished();
+private:
+    void onTouch(cocos2d::Touch *touch);
+    
+    void killBugs(std::vector<Bug*> bugs, const cocos2d::Vec2 &effectPos);
+    
+    void updateBackgroundBinary(float dt = 0);
+    void showLevelLabel(SBCallback onCompleted);
+    
+private:
+    int life;           // 현재 레벨의 남은 라이프
+    int kills;          // 현재 레벨의 버그 퇴치 수
+    int totalKills;     // 누적 버그 퇴치 수
+    
+    struct Life {
+        cocos2d::Node *unusedIcon;
+        cocos2d::Node *usedIcon;
+        
+        void setEnabled(bool isEnabled) {
+            unusedIcon->setVisible(isEnabled);
+            usedIcon->setVisible(isEnabled);
+        }
+        
+        void setUsed(bool used) {
+            unusedIcon->setVisible(!used);
+            usedIcon->setVisible(used);
+        }
+    };
+    
+    std::vector<Life> lifes;
+    std::vector<Bug*> bugs;
+    GameTimer *timer;
+
+    std::vector<BgBinary*> bgBinarys;
 };
 
 #endif /* GameView_hpp */

@@ -66,7 +66,7 @@ void MainScene::onEnter() {
     
     // bgm
     scheduleOnce([=](float) {
-        SBAudioEngine::playBGM(SOUND_BGM_MAIN);
+        // SBAudioEngine::playBGM(SOUND_BGM_MAIN);
     }, SceneManager::REPLACE_DURATION_MAIN, "MAIN_SCENE_BGM_DELAY");
     
     // 개인 정보 처리 방침 안내 팝업

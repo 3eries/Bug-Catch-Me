@@ -108,7 +108,7 @@ void SceneManager::replace(SceneType type, function<Scene*()> createSceneFunc) {
             }
         } break;
         case SceneType::GAME: {
-            trans = TransitionSlideInR::create(REPLACE_DURATION_GAME, scene);
+            // trans = TransitionSlideInR::create(REPLACE_DURATION_GAME, scene);
             // trans = TransitionFade::create(REPLACE_DURATION_GAME, scene);
         } break;
             

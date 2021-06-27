@@ -44,13 +44,11 @@ static const std::string ANALYTICS_EVENT_CREDIT                     = "credit"; 
 static const std::string ANALYTICS_EVENT_MORE_GAMES                 = "more_games";                 // 게임 더보기 클릭
 static const std::string ANALYTICS_EVENT_REVIEW_POPUP               = "review_popup";               // 리뷰 팝업 진입
 
+static const std::string ANALYTICS_EVENT_GAME_PLAY                  = "game_play";
+static const std::string ANALYTICS_EVENT_GAME_RESULT                = "game_result";
+
 static const std::string ANALYTICS_EVENT_LEVEL_PLAY                 = "level_play";
 static const std::string ANALYTICS_EVENT_LEVEL_CLEAR                = "level_clear";
-static const std::string ANALYTICS_EVENT_LEVEL_REFRESH              = "level_refresh";
-
-static const std::string ANALYTICS_EVENT_HINT_USE                   = "hint_use";                   // 힌트 사용
-static const std::string ANALYTICS_EVENT_HINT_GET_POPUP             = "hint_get_popup";             // 힌트 획득 팝업 노출
-static const std::string ANALYTICS_EVENT_HINT_GET                   = "hint_get";                   // 힌트 획득
 
 static const std::string ANALYTICS_EVENT_PARAM_LEVEL                = "level";
 static const std::string ANALYTICS_EVENT_PARAM_LEVEL_RANGE          = "level_range";
@@ -136,6 +134,7 @@ static const std::string SOUND_LEVEL_CLEAR          = DIR_SOUND + "effect_05.mp3
 namespace Color {
     static const cocos2d::Color4B POPUP_BG          = cocos2d::Color4B(0,0,0,255*0.5f);
     static const cocos2d::Color4B GAME_BG           = cocos2d::Color4B(16,16,16,255);
+    static const cocos2d::Color4B HIGHLIGHT         = cocos2d::Color4B(220,35,53,255);
 }
 
 // ZOrder

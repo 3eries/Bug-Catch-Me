@@ -49,7 +49,7 @@ public:
     bool            isPaused();
     
     // Data
-    void            setStage(int stage);
+    LevelData       getLevelData();
     
     // Score
     void            setScore(int score);
@@ -62,7 +62,7 @@ public:
 private:
     CC_SYNTHESIZE_READONLY(GameState, state, State);              // 게임 상태
     
-    CC_SYNTHESIZE_READONLY(StageData, stage, Stage);              // 스테이지
+    CC_SYNTHESIZE_READONLY(int, level, Level);                    // 레벨
     CC_SYNTHESIZE_READONLY(int, score, Score);                    // 스코어
     CC_SYNTHESIZE_READONLY(int, resultCount, ResultCount);        // 결과 노출 횟수
     CC_SYNTHESIZE_READONLY(int, continueCount, ContinueCount);    // 이어하기한 횟수
@@ -88,7 +88,7 @@ public:
     
     static void onStageChanged();
     static void onStageRestart();
-    static void onStageClear(bool isSkipped = false);
+    static void onStageClear();
     
     static void onStartTimer();
     static void onMoveNextStage();

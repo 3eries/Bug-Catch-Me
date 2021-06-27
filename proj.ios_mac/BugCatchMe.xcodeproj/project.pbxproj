@@ -19,6 +19,10 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		294D0D641D0D56D500F7F5D4 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 294D0D631D0D56D500F7F5D4 /* CoreText.framework */; };
 		46880B8819C43A87006E1F66 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46880B8419C43A87006E1F66 /* AppDelegate.cpp */; };
+		5064A95F2685BF1D0072B0C3 /* ResultPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5064A95E2685BF1D0072B0C3 /* ResultPopup.cpp */; };
+		5064A9622685CA0B0072B0C3 /* BgBinary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5064A9602685CA0B0072B0C3 /* BgBinary.cpp */; };
+		5064A9652685CA1B0072B0C3 /* GameTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5064A9632685CA1B0072B0C3 /* GameTimer.cpp */; };
+		506D4C7826889E8D0000964B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 506D4C7726889E8D0000964B /* GoogleService-Info.plist */; };
 		5074A4D72684813100C0BA5B /* Bug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5074A4D52684813100C0BA5B /* Bug.cpp */; };
 		507BF6ED26834A0B0037F28C /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = 507BF6E726834A0A0037F28C /* fonts */; };
 		507BF6EE26834A0B0037F28C /* content in Resources */ = {isa = PBXBuildFile; fileRef = 507BF6E826834A0A0037F28C /* content */; };
@@ -171,6 +175,13 @@
 		503AE10417EB98FF00D1A890 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Prefix.pch; path = mac/Prefix.pch; sourceTree = "<group>"; };
 		503AE11117EB99EE00D1A890 /* libcurl.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcurl.dylib; path = usr/lib/libcurl.dylib; sourceTree = SDKROOT; };
 		503AE11A17EB9C5A00D1A890 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		5064A95D2685BF1D0072B0C3 /* ResultPopup.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ResultPopup.hpp; sourceTree = "<group>"; };
+		5064A95E2685BF1D0072B0C3 /* ResultPopup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResultPopup.cpp; sourceTree = "<group>"; };
+		5064A9602685CA0B0072B0C3 /* BgBinary.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BgBinary.cpp; sourceTree = "<group>"; };
+		5064A9612685CA0B0072B0C3 /* BgBinary.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BgBinary.hpp; sourceTree = "<group>"; };
+		5064A9632685CA1B0072B0C3 /* GameTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameTimer.cpp; sourceTree = "<group>"; };
+		5064A9642685CA1B0072B0C3 /* GameTimer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GameTimer.hpp; sourceTree = "<group>"; };
+		506D4C7726889E8D0000964B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5074A4D52684813100C0BA5B /* Bug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Bug.cpp; sourceTree = "<group>"; };
 		5074A4D62684813100C0BA5B /* Bug.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Bug.hpp; sourceTree = "<group>"; };
 		507BF6E726834A0A0037F28C /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
@@ -419,9 +430,10 @@
 		1AF87B461F6F77D6007BE51C /* ios */ = {
 			isa = PBXGroup;
 			children = (
-				1A88B2631FC3D9C9005C14AE /* Images.xcassets */,
 				1AF87B471F6F77D6007BE51C /* AppController.h */,
 				1AF87B481F6F77D6007BE51C /* AppController.mm */,
+				506D4C7726889E8D0000964B /* GoogleService-Info.plist */,
+				1A88B2631FC3D9C9005C14AE /* Images.xcassets */,
 				1AF87B581F6F77D6007BE51C /* Info.plist */,
 				1AF87B591F6F77D6007BE51C /* LaunchScreen.storyboard */,
 				1AF87B5A1F6F77D6007BE51C /* LaunchScreenBackground.png */,
@@ -900,6 +912,10 @@
 		507BF79E26834EF30037F28C /* ui */ = {
 			isa = PBXGroup;
 			children = (
+				5064A9602685CA0B0072B0C3 /* BgBinary.cpp */,
+				5064A9612685CA0B0072B0C3 /* BgBinary.hpp */,
+				5064A95E2685BF1D0072B0C3 /* ResultPopup.cpp */,
+				5064A95D2685BF1D0072B0C3 /* ResultPopup.hpp */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -908,8 +924,10 @@
 			isa = PBXGroup;
 			children = (
 				5074A4D52684813100C0BA5B /* Bug.cpp */,
-				507BF97F268364E40037F28C /* StageProgressBar.cpp */,
 				5074A4D62684813100C0BA5B /* Bug.hpp */,
+				5064A9632685CA1B0072B0C3 /* GameTimer.cpp */,
+				5064A9642685CA1B0072B0C3 /* GameTimer.hpp */,
+				507BF97F268364E40037F28C /* StageProgressBar.cpp */,
 				507BF97E268364E40037F28C /* StageProgressBar.hpp */,
 			);
 			path = object;
@@ -1110,6 +1128,7 @@
 				507BF6F126834A0B0037F28C /* images in Resources */,
 				507BF6F226834A0B0037F28C /* sounds in Resources */,
 				507BF6ED26834A0B0037F28C /* fonts in Resources */,
+				506D4C7826889E8D0000964B /* GoogleService-Info.plist in Resources */,
 				507BF6EF26834A0B0037F28C /* config in Resources */,
 				507BF6EE26834A0B0037F28C /* content in Resources */,
 			);
@@ -1152,6 +1171,7 @@
 				507BF7E926834EF30037F28C /* NSData+AES.m in Sources */,
 				507BF81126834EF30037F28C /* SBCollection.cpp in Sources */,
 				507BF81F26834EF30037F28C /* SBTypes.cpp in Sources */,
+				5064A95F2685BF1D0072B0C3 /* ResultPopup.cpp in Sources */,
 				507BF7EC26834EF30037F28C /* NSData+Base64.m in Sources */,
 				507BF82F26834EF30037F28C /* BaseScene.cpp in Sources */,
 				507BF7E126834EF30037F28C /* User.cpp in Sources */,
@@ -1174,6 +1194,7 @@
 				507BF81526834EF30037F28C /* ConsentManager.cpp in Sources */,
 				507BF82026834EF30037F28C /* SBEvent.cpp in Sources */,
 				507BF80226834EF30037F28C /* GameCenterHelper.mm in Sources */,
+				5064A9652685CA1B0072B0C3 /* GameTimer.cpp in Sources */,
 				507BF7F526834EF30037F28C /* PluginManager.cpp in Sources */,
 				1AF87B781F6F77F7007BE51C /* AppController.mm in Sources */,
 				5074A4D72684813100C0BA5B /* Bug.cpp in Sources */,
@@ -1196,6 +1217,7 @@
 				507BF7FA26834EF30037F28C /* IAPHelper.cpp in Sources */,
 				507BF7EB26834EF30037F28C /* SBSecurity.cpp in Sources */,
 				507BF7EE26834EF30037F28C /* AdListener.cpp in Sources */,
+				5064A9622685CA0B0072B0C3 /* BgBinary.cpp in Sources */,
 				507BF7F026834EF30037F28C /* AdUnit.cpp in Sources */,
 				507BF82526834EF30037F28C /* CreditPopup.cpp in Sources */,
 				507BF7E426834EF30037F28C /* SBBasePopup.cpp in Sources */,

@@ -54,10 +54,9 @@ void GameManager::reset() {
     
     state = GameState::NONE;
     score = 0;
+    level = 1;
     resultCount = 0;
     continueCount = 0;
-    
-    setStage(1);
 }
 
 /**
@@ -98,12 +97,10 @@ bool GameManager::isPaused() {
     return hasState(GameState::PAUSED);
 }
 
-/**
- * 스테이지를 설정합니다
- */
-void GameManager::setStage(int stage) {
+LevelData GameManager::getLevelData() {
     
-    this->stage = Database::getStage(stage);
+    int level = MIN(GAME_CONFIG->getMaxLevel().level, getLevel());
+    return GAME_CONFIG->getLevel(level);
 }
 
 /**
@@ -187,7 +184,6 @@ void GameManager::onGameReset() {
     Log::i("GameManager::onGameReset");
     
     getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_RESET);
-    onStageChanged();
 }
 
 /**
@@ -196,6 +192,8 @@ void GameManager::onGameReset() {
 void GameManager::onGameStart() {
     
     Log::i("GameManager::onGameStart start");
+    
+    SBAnalytics::logEvent(ANALYTICS_EVENT_GAME_PLAY);
     
     onGameReset();
     
@@ -266,18 +264,6 @@ void GameManager::onGameOver(bool isTimeout) {
     getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_OVER);
     
     instance->resultCount++;
-    
-    // 통계 이벤트
-//    int stage = instance->stage.stage;
-//    string overType = isTimeout ? "timeout" : "draw_miss";
-//
-//    SBAnalytics::EventParams params;
-//    params[FA_EVENT_PARAM_STAGE] = SBAnalytics::EventParam(TO_STRING(stage));
-//    params[FA_EVENT_PARAM_STAGE_RANGE] = SBAnalytics::EventParam(SBAnalytics::getNumberRange(stage, 1, 5, 5));
-//    params[FA_EVENT_PARAM_GAME_OVER_TYPE] = Value(overType);
-//    params[FA_EVENT_PARAM_STAGE_GAME_OVER_TYPE] = Value(STR_FORMAT("%d-%s", stage, overType.c_str()));
-//
-//    SBAnalytics::logEvent(FA_EVENT_GAME_OVER, params);
 }
 
 /**
@@ -303,11 +289,31 @@ void GameManager::onGameContinue() {
 /**
  * 게임 결과
  */
+static void logEventGameResult(int level) {
+    
+    if( level < 1 ) {
+        return;
+    }
+    
+    // firebase 이벤트 기록
+    SBAnalytics::EventParams params;
+    params[ANALYTICS_EVENT_PARAM_LEVEL] = SBAnalytics::EventParam(level);
+    params[ANALYTICS_EVENT_PARAM_LEVEL_RANGE] = SBAnalytics::EventParam(SBAnalytics::getNumberRange(level, 1, 5, 5));
+
+    SBAnalytics::logEvent(ANALYTICS_EVENT_GAME_RESULT, params);
+}
+
 void GameManager::onGameResult() {
     
     CCLOG("GameManager::onGameResult");
     
     CCASSERT(instance->hasState(GameState::GAME_OVER), "GameManager::onGameResult invalid called.");
+    
+    const int level = instance->getLevel();
+    
+    if( level > 0 ) {
+        logEventGameResult(level);
+    }
     
     instance->removeState(GameState::GAME_OVER);
     instance->addState(GameState::RESULT);
@@ -319,17 +325,11 @@ void GameManager::onGameResult() {
  */
 void GameManager::onStageChanged() {
     
-    auto stage = instance->stage;
-    Log::i("GameManager::onStageChanged stage: %d", stage.stage);
+    auto level = instance->level;
+    auto levelData = instance->getLevelData();
+    Log::i("GameManager::onStageChanged stage: %d", level);
     
-    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_STAGE_CHANGED, &stage);
-    
-    // 통계 이벤트
-    SBAnalytics::EventParams params;
-    params[ANALYTICS_EVENT_PARAM_LEVEL] = SBAnalytics::EventParam(TO_STRING(stage.stage));
-    params[ANALYTICS_EVENT_PARAM_LEVEL_RANGE] = SBAnalytics::EventParam(SBAnalytics::getNumberRange(stage.stage, 1, 5, 5));
-
-    SBAnalytics::logEvent(ANALYTICS_EVENT_LEVEL_PLAY, params);
+    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_STAGE_CHANGED, &levelData);
 }
 
 /**
@@ -337,38 +337,28 @@ void GameManager::onStageChanged() {
  */
 void GameManager::onStageRestart() {
     
-    auto stage = instance->stage;
-    Log::i("GameManager::onStageRestart stage: %d", stage.stage);
+    auto level = instance->level;
+    auto levelData = instance->getLevelData();
+    Log::i("GameManager::onStageRestart stage: %d", level);
     
-    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_STAGE_RESTART, &stage);
+    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_STAGE_RESTART, &levelData);
 }
 
 /**
  * 스테이지 클리어
  */
-void GameManager::onStageClear(bool isSkipped) {
+void GameManager::onStageClear() {
     
-    auto stage = instance->stage;
-    Log::i("GameManager::onStageClear stage: %d", stage.stage);
+    auto level = instance->level;
+    auto levelData = instance->getLevelData();
+    Log::i("GameManager::onStageClear stage: %d", level);
     
-    superbomb::PluginPlay::submitScore(LEADER_BOARD_TOP_LEVEL, stage.stage);
+    // superbomb::PluginPlay::submitScore(LEADER_BOARD_TOP_LEVEL, level);
     
-    // 클리어한 스테이지 저장
-    if( stage.stage <= Database::getLastStage().stage ) {
-        User::setClearStage(stage.stage);
-    }
+    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_STAGE_CLEAR, &levelData);
     
-    if( !isSkipped ) {
-        getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_STAGE_CLEAR, &stage);
-        instance->resultCount++;
-    }
-    
-    // 통계 이벤트
-    SBAnalytics::EventParams params;
-    params[ANALYTICS_EVENT_PARAM_LEVEL] = SBAnalytics::EventParam(TO_STRING(stage.stage));
-    params[ANALYTICS_EVENT_PARAM_LEVEL_RANGE] = SBAnalytics::EventParam(SBAnalytics::getNumberRange(stage.stage, 1, 5, 5));
-    
-    SBAnalytics::logEvent(ANALYTICS_EVENT_LEVEL_CLEAR, params);
+    instance->level++;
+    onStageChanged();
 }
 
 /**
@@ -384,13 +374,13 @@ void GameManager::onStartTimer() {
  */
 void GameManager::onMoveNextStage() {
     
-    // 마지막 레벨인 경우 가상 레벨 추가
-    if( instance->stage.stage == Database::getLastStage().stage ) {
-        Database::addVirtualLevel();
-    }
-    
-    instance->setStage(instance->stage.stage+1);
-    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_MOVE_NEXT_STAGE, &instance->stage);
+//    // 마지막 레벨인 경우 가상 레벨 추가
+//    if( instance->stage.stage == Database::getLastStage().stage ) {
+//        Database::addVirtualLevel();
+//    }
+//
+//    instance->setStage(instance->stage.stage+1);
+//    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_MOVE_NEXT_STAGE, &instance->stage);
 }
 
 /**
@@ -398,8 +388,8 @@ void GameManager::onMoveNextStage() {
  */
 void GameManager::onMoveNextStageFinished() {
     
-    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_MOVE_NEXT_STAGE_FINISHED, &instance->stage);
-    onStageChanged();
+//    getEventDispatcher()->dispatchCustomEvent(GAME_EVENT_MOVE_NEXT_STAGE_FINISHED, &instance->stage);
+//    onStageChanged();
 }
 
 /**

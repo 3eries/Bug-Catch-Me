@@ -15,7 +15,7 @@
 #include "superbomb.h"
 
 #include "BaseScene.hpp"
-#include "../content/data/model/StageData.h"
+#include "GameManager.hpp"
 
 class GameView;
 
@@ -50,11 +50,17 @@ private:
     
 // Game Event
 private:
-    void onStageChanged(const StageData &stage);
-    void onStageClear(const StageData &stage);
+    void onGameReset();
+    void onGamePause();
+    void onGameResume();
+    void onGameOver();
+    void onGameResult();
+    
+    void onLevelClear(const LevelData &level);
 
 public:
     void replaceScene(SceneType type) override;
+    void showResultPopup();
     
     void checkReview();
     

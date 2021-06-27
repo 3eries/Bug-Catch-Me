@@ -39,8 +39,6 @@ bool StageProgressBar::init() {
 void StageProgressBar::onEnter() {
     
     Node::onEnter();
-    
-    onStageChanged(GAME_MANAGER->getStage());
 }
 
 void StageProgressBar::initUI() {
