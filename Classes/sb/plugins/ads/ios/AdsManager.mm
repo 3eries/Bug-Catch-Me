@@ -127,20 +127,20 @@ using namespace std;
         UILayoutGuide *guide = view.safeAreaLayoutGuide;
         
         // align screen bottom
+        /*
         [NSLayoutConstraint activateConstraints:@[
                                                   [guide.leftAnchor constraintEqualToAnchor:self.bannerView.leftAnchor],
                                                   [guide.rightAnchor constraintEqualToAnchor:self.bannerView.rightAnchor],
                                                   [guide.bottomAnchor constraintEqualToAnchor:self.bannerView.bottomAnchor]
                                                   ]];
+        */
+        
         // align screen top
-        /*
         [NSLayoutConstraint activateConstraints:@[
                                                   [guide.leftAnchor constraintEqualToAnchor:self.bannerView.leftAnchor],
                                                   [guide.rightAnchor constraintEqualToAnchor:self.bannerView.rightAnchor],
                                                   [guide.topAnchor constraintEqualToAnchor:self.bannerView.topAnchor]
                                                   ]];
-         */
-        
     } else {
         // In lower iOS versions, safe area is not available so we use
         // bottom layout guide and view edges.
@@ -159,6 +159,7 @@ using namespace std;
                                                         multiplier:1
                                                           constant:0]];
         // align screen bottom
+        /*
         [view addConstraint:[NSLayoutConstraint constraintWithItem:self.bannerView
                                                          attribute:NSLayoutAttributeBottom
                                                          relatedBy:NSLayoutRelationEqual
@@ -166,9 +167,9 @@ using namespace std;
                                                          attribute:NSLayoutAttributeTop
                                                         multiplier:1
                                                           constant:0]];
+        */
         
         // align screen top
-        /*
         [view addConstraint:[NSLayoutConstraint constraintWithItem:self.bannerView
                                                          attribute:NSLayoutAttributeTop
                                                          relatedBy:NSLayoutRelationEqual
@@ -176,7 +177,6 @@ using namespace std;
                                                          attribute:NSLayoutAttributeBottom
                                                         multiplier:1
                                                           constant:0]];
-         */
     }
     
     /*
