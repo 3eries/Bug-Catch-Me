@@ -1,0 +1,72 @@
+{
+  "project_info": {
+    "project_number": "22857055315",
+    "firebase_url": "https://beries-bug-catchme.firebaseio.com",
+    "project_id": "beries-bug-catchme",
+    "storage_bucket": "beries-bug-catchme.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:22857055315:android:071de09dab90826c",
+        "android_client_info": {
+          "package_name": "com.superbomb.beries.BCatchMe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "22857055315-08394e2dnb72lqrn0nungf9so052vjgj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.superbomb.beries.BCatchMe",
+            "certificate_hash": "69a0e532fa58cf8b0e4c0b6ed4a489c5b7d450db"
+          }
+        },
+        {
+          "client_id": "22857055315-3nhakif0q3c9jr3tib7aa5mf57mds83g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.superbomb.beries.BCatchMe",
+            "certificate_hash": "974066f51b60e6c42a62862599e69c9678f102d7"
+          }
+        },
+        {
+          "client_id": "22857055315-j67ruk221hh7p6ou43608osr59fba66g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.superbomb.beries.BCatchMe",
+            "certificate_hash": "a1fc26a7f1d13fb96b7e8d16ccf056f5cbe8f83d"
+          }
+        },
+        {
+          "client_id": "22857055315-7g1b31a58bouf9m1u7e9llcpneubtevh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzLrBUvG0JfzeP84ud9rI0DhLl2nJ2A-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "22857055315-7g1b31a58bouf9m1u7e9llcpneubtevh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "22857055315-19ddqnhav3ec8j8ck69rasiupvmnl7cu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.superbomb.beries.BCatchMe"
+              }
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-9699962520672188~5176164663"
+    }
+  ],
+  "configuration_version": "1"
+}

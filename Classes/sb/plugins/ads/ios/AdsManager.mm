@@ -98,8 +98,22 @@ using namespace std;
     
 //    GADAdSize bannerSize =
 //                    !SBDirector::isPadResolution() ? kGADAdSizeBanner : kGADAdSizeSmartBannerPortrait;
+    // 배너 크기 설정
+    UIView *view = ROOT_VIEW_CONTROLLER.view;
     GADAdSize bannerSize = kGADAdSizeSmartBannerPortrait;
     
+    {
+        CGRect frame = view.frame;
+        
+        if( @available(iOS 11.0, *) ) {
+            frame = UIEdgeInsetsInsetRect(view.frame, view.safeAreaInsets);
+        }
+        
+        CGFloat viewWidth = frame.size.width;
+        bannerSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(viewWidth);
+    }
+    
+    // 배너 생성
     self.bannerView = [[GADBannerView alloc] initWithAdSize:bannerSize];
     self.bannerView.adUnitID = NS_STRING(unitId.c_str());
     self.bannerView.hidden = YES;
@@ -107,7 +121,6 @@ using namespace std;
     self.bannerView.delegate = self;
     self.bannerView.rootViewController = ROOT_VIEW_CONTROLLER;
     
-    UIView *view = ROOT_VIEW_CONTROLLER.view;
     [view addSubview:self.bannerView];
     
     // set frame

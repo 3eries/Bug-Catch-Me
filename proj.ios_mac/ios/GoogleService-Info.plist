@@ -34,5 +34,7 @@
 	<string>1:22857055315:ios:6f6e96954366e917821aa6</string>
 	<key>DATABASE_URL</key>
 	<string>https://beries-bug-catchme.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-9699962520672188~4139135267</string>
 </dict>
 </plist>
