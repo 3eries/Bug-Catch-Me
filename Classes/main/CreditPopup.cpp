@@ -111,10 +111,12 @@ void CreditPopup::initCredit() {
     // 배너 영역을 고려하여 컨텐트뷰를 높인다
     // getContentView()->setPosition(getContentView()->getPosition() + Vec2(0,60));
     
+    Vec2 temp(0, -150);
+    
     // Title
     auto title = Sprite::create(DIR_IMG_MAIN + "main_title_3eries.png");
     title->setAnchorPoint(ANCHOR_M);
-    title->setPosition(Vec2TC(0, -211));
+    title->setPosition(Vec2TC(0, -211) + temp);
     addContentChild(title);
     
     // Member
@@ -148,7 +150,7 @@ void CreditPopup::initCredit() {
         Vec2MC(10, -476),
     };
     
-    Vec2 temp(0,-100);
+    temp += Vec2(0, -50);
     
     for( int i = 0; i < MEMBERS.size(); ++i ) {
         auto member = members[i];
