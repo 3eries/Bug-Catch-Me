@@ -93,7 +93,15 @@ void GameView::onGameStart() {
  */
 void GameView::onGamePause() {
     
-    SBNodeUtils::recursivePause(this);
+    for( auto binary : bgBinarys ) {
+        binary->pause();
+    }
+    
+    for( auto bug : bugs ) {
+        bug->pause();
+    }
+    
+    timer->pause();
 }
 
 /**
@@ -101,7 +109,15 @@ void GameView::onGamePause() {
  */
 void GameView::onGameResume() {
     
-    SBNodeUtils::recursiveResume(this);
+    for( auto binary : bgBinarys ) {
+        binary->resume();
+    }
+    
+    for( auto bug : bugs ) {
+        bug->resume();
+    }
+    
+    timer->resume();
 }
 
 /**
