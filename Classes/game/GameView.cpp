@@ -135,6 +135,7 @@ void GameView::onGameOver() {
 void GameView::onGameResult() {
     
     removeChildByTag(Tag::BG_BINARY);
+    bgBinarys.clear();
 }
 
 /**
