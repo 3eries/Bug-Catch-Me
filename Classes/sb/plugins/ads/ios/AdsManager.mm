@@ -320,8 +320,6 @@ didFailToPresentFullScreenContentWithError:(nonnull NSError *)error {
 - (void) adDidPresentFullScreenContent:(nonnull id<GADFullScreenPresentingAd>)ad {
 
     NSLog(@"adDidPresentFullScreenContent");
-
-    Application::getInstance()->applicationDidEnterBackground();
     
     if( ad == self.interstitialAd ) {
         AdsHelper::getInstance()->getInterstitial()->onAdOpened();
@@ -359,8 +357,6 @@ didFailToPresentFullScreenContentWithError:(nonnull NSError *)error {
         
         [self loadRewardedVideo];
     }
-    
-    Application::getInstance()->applicationWillEnterForeground();
 }
 
 #pragma mark- 보상형
