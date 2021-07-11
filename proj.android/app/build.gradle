@@ -9,8 +9,8 @@ android {
         applicationId "com.superbomb.beries.BCatchMe"
         minSdkVersion PROP_MIN_SDK_VERSION
         targetSdkVersion PROP_TARGET_SDK_VERSION
-        versionCode 3
-        versionName "0.2.5"
+        versionCode 4
+        versionName "0.2.6"
         multiDexEnabled true
 
         externalNativeBuild {
